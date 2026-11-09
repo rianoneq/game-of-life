@@ -1,0 +1,28 @@
+{
+    "name": "game-of-life",
+    "dockerComposeFile": "../docker-compose.yaml",
+    "shutdownAction": "stopCompose",
+    "service": "main",
+    "workspaceFolder": "/src",
+    "remoteUser": "root",
+    "mounts": [
+        "source=${localEnv:HOME}/.config/fish,target=/root/.config/fish,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.wakatime.cfg,target=/home/dev/.wakatime.cfg,type=bind,consistency=delegated"
+    ],
+    "remoteEnv": {
+        "WAKATIME_API_KEY": "${localEnv:WAKATIME_API_KEY}"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "WakaTime.vscode-wakatime"
+            ]
+        }
+    },
+    "postStartCommand": "apt-get update && apt-get install -y make fish"
+}
